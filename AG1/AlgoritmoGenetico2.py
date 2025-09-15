@@ -4,13 +4,13 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 
 # =========================
-# Configuración del problema
+# Cantidad de ciudades random en posiciones random
 # =========================
 num_cities = np.random.randint(10, 21)
 cities = np.random.rand(num_cities, 2) * 100
 
 # =========================
-# Funciones auxiliares
+#Auxiliares
 # =========================
 def total_distance(order):
     route = [0] + list(order) + [0]
@@ -67,7 +67,7 @@ def ordered_crossover(parents, offspring_size, ga_instance):
     return np.array(offspring)
 
 # =========================
-# Historia de generación
+# Historial de generaciones para la animacion
 # =========================
 best_routes = []
 best_distances = []
@@ -82,7 +82,7 @@ def on_generation(ga_instance):
         best_distances.append(total_distance(solution))
 
 # =========================
-# Configuración GA
+# Configuración del AG
 # =========================
 num_generations = 5000
 num_parents_mating = 5
@@ -105,7 +105,7 @@ ga_instance = pygad.GA(
 )
 
 # =========================
-# Ejecutar GA
+# Ejecución del AG
 # =========================
 ga_instance.run()
 
@@ -117,14 +117,14 @@ print("Distancia total mínima:", best_distance)
 print("Fitness de la mejor solución:", best_fitness)
 
 # =========================
-# Ruta vecino más cercano
+# Ruta vecino más cercano para ver si el AG funca
 # =========================
 nn_route = nearest_neighbor(cities)
 nn_distance = sum(np.linalg.norm(cities[nn_route[i]] - cities[nn_route[i+1]]) for i in range(len(nn_route)-1))
 print("Distancia ruta vecino más cercano:", nn_distance)
 
 # =========================
-# Animación
+# Animación del gráfico
 # =========================
 fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14,6))
 
